@@ -49,6 +49,8 @@ mkdir payloads
 mkdir payloads/vuln-payloads
 cd payloads; git clone https://github.com/swisskyrepo/PayloadsAllTheThings;
 cd ..
+cd ..
+
 
 # get python pip packages  
 pip install wfuzz

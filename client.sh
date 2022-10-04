@@ -50,8 +50,9 @@ parse_response (){
 		then
 				run_debug
 		fi
+
 		# check for any signals from the server 
-		signal=$(echo $resp | jq -r 'if.config?.signal')
+		signal=$(echo $resp | jq -r 'if.config?.signal? then .config.signal else empty end')
 		handle_signal 
 		# check if 
 }
