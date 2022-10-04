@@ -60,11 +60,11 @@ pip install photon
 pip install arjun
 pip install s3recon
 
+echo "init finished" > .init_finished
 
 ## finally link everything in the /notebooks/bin/ directory to the /usr/local/bin
-ln -s -f $(pwd)/bin/* /usr/local/bin/
+# ln -s -f $(pwd)/bin/* /usr/local/bin/
 
-echo "init finished" > .init_finished
 
 
 
