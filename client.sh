@@ -24,6 +24,12 @@ shutdown_program () {
 		# TODO: add the graceful part
 		kill -KILL $$
 }
+kill_task () {
+		kill -KILL $(cat .running_cmd_pid)
+		set_status "idle"
+		# TODO: change this to accomodate running multiple tasks
+		echo "" > .running_cmd_pid
+}
 handle_signal(){
 		# if signal is stop kill the running process
 		case "$signal" in
