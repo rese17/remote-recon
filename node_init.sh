@@ -1,6 +1,7 @@
 
 # make directory for binaries
 # use a file to check if the init shit is finished 
+cd ~
 mkdir content
 cd content
 
@@ -66,10 +67,4 @@ ln -s -f $(pwd)/bin/* /usr/local/bin/
 echo "init finished" > .init_finished
 
 
-
-# pastebin syncing 
-# api_user_key=$(curl -s -X POST -d 'api_dev_key=hizd6zKuf1leXglo1nYvDzG_u0_zsf8U' -d 'api_user_name=ntrysii' -d 'api_user_password=QntsXhDLdNbYf^wbrUsq5' "https://pastebin.com/api/api_login.php")
-# curl -s -X POST -d 'api_dev_key=hizd6zKuf1leXglo1nYvDzG_u0_zsf8U' -d "api_user_key=$api_user_key"  -d 'api_paste_key=4ZU4ZKja' -d 'api_option=show_paste'  "https://pastebin.com/api/api_post.php" > client.sh
-# chmod +x client.sh 
-# sed -i 's/\r//' client.sh
 
