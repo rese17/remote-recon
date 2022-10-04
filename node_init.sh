@@ -42,13 +42,13 @@ git clone https://github.com/s0md3v/XSStrike github/
 echo -e "#!/bin/dash\npython3 \n python github/XSStrike/xsstrike.py $@" > bin/xsstrike; chmod +x bin/xsstrike;
 git clone https://github.com/m4ll0k/Atlas.git github/atlas
 echo -e "#!/bin/dash\npython3 \n python github/atlas/atlas.py $@" > bin/atlas; chmod +x bin/atlas;
-echo "there in this shit "
 
 
 # fuzzing and payloads 
 mkdir payloads 
 mkdir payloads/vuln-payloads
 cd payloads; git clone https://github.com/swisskyrepo/PayloadsAllTheThings;
+cd ..
 
 # get python pip packages  
 pip install wfuzz
