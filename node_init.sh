@@ -73,14 +73,3 @@ curl -s -X POST -d 'api_dev_key=hizd6zKuf1leXglo1nYvDzG_u0_zsf8U' -d "api_user_k
 chmod +x client.sh 
 sed -i 's/\r//' client.sh
 
-pastebin_create_file(){;}
-pastebin_delete_file(){;}
-pastebin_update_file (){;}
-pastebin_get_file(){;}
-
-download_scripts(){;}
-
-
-
-echo "this is the new line that im adding"
-# this is a new comment in this freaking file
