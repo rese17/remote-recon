@@ -19,6 +19,29 @@ set_status () {
 		echo $1 > .client_status
 }
 
+handle_signal(){
+		# if signal is stop kill the running process
+		case "$signal" in
+				"kill")
+						# handle kill
+						kill_task
+				;;
+				"wait")
+						# handle wait
+						set_status "wait"
+				;;
+				"shutdown")
+						# handle shutdown
+						shutdown_program
+				;;
+				"resume")
+						# handle resume
+						set_status "idle"
+				;;
+		esac
+}
+
+
 parse_response (){
 		# check if there is a debugging in the response
 		debug=$(echo $resp | jq -r 'if .config?.debug? then "debug" else empty end' )
@@ -132,28 +155,7 @@ sync_server $sid
 kill_task () { ; }
 shutdown_program () {; }
 
-handle_signal(){
-		# if signal is stop kill the running process
-		case "$signal" in
-				"kill")
-						# handle kill
-						kill_task
-				;;
-				"wait")
-						# handle wait
-						set_status "wait"
-				;;
-				"shutdown")
-						# handle shutdown
-						shutdown_program
-				;;
-				"resume")
-						# handle resume
-						set_status "idle"
-				;;
-				esac
-				
-}
+
 
 
 
