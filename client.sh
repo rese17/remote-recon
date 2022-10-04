@@ -9,6 +9,7 @@ PATH="~/content/bin/:$PATH"
 gen_random_id(){
 		echo $(hexdump -vn16 -e'4/4 "%08X" 1 "\n"' /dev/urandom)
 }
+
 get_status(){
 		if [ ! -f .client_status ]; then echo "idle" > .client_status; fi
 		cat .client_status
@@ -24,12 +25,15 @@ shutdown_program () {
 		# TODO: add the graceful part
 		kill -KILL $$
 }
+
 kill_task () {
 		kill -KILL $(cat .running_cmd_pid)
 		set_status "idle"
 		# TODO: change this to accomodate running multiple tasks
 		echo "" > .running_cmd_pid
 }
+
+
 handle_signal(){
 		# if signal is stop kill the running process
 		case "$signal" in
@@ -70,8 +74,6 @@ parse_response (){
 
 # TODO: add more debugging code functions
 run_debug (){
-		
-		echo "DEBUG" 
 		echo $resp
 		echo "server response: $resp"
 		status="node status: $(get_status) "
@@ -116,7 +118,7 @@ get_ngrok_url (){
 
 
 ngrok_url=$(get_ngrok_url)
-sync_server(){
+sync_server() {
 		# syncs the node with the server 
 		ngrok_url=$(get_ngrok_url)
 		while [ ! -z "a" ]
@@ -124,7 +126,7 @@ sync_server(){
 				# echo "syncing..."
 				resp=$(curl -s --request POST --data '{"host":"colab","status"'":\"$(get_status)\", \"id\":\"$1\"}" "$ngrok_url/sync/");
 				# handles the reponse and run the required functions
-				parse_response 
+				parse_response
 				# run the cmd 
 				cmd="$(echo $resp | jq 'if .task then .task else empty end' | jq -r '.cmd?')"
 				if [ ! -z "$cmd" ]
@@ -133,8 +135,10 @@ sync_server(){
 						set_script $cmd 
 						cat <<<$cmd
 						run_command 
+						echo "$!" > .running_cmd_pid
+
 				fi
-				sleep 4
+				sleep 3
 		done 
 
 }
@@ -142,7 +146,7 @@ sync_server(){
 run_command(){
 		# runs the command coming from the server
 		set_status "busy"
-		run_cmd &
+		time run_cmd &
 		kill -CONT $!
 }
 
@@ -164,18 +168,9 @@ purge_after_cmd(){
 
 run_cmd (){
 		./.cmd_script
-		set_status "idle"
+		purge_after_cmd
 }
+
 sid=$(gen_random_id)
 echo $sid
-sync_server $sid 
-
-kill_task () { ; }
-shutdown_program () {; }
-
-
-
-
-
-
-
+sync_server $sid
