@@ -19,6 +19,11 @@ set_status () {
 		echo $1 > .client_status
 }
 
+shutdown_program () {
+		# gracefully kills the script 
+		# TODO: add the graceful part
+		kill -KILL $$
+}
 handle_signal(){
 		# if signal is stop kill the running process
 		case "$signal" in
