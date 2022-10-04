@@ -1,6 +1,10 @@
 #!/bin/bash
 
 
+# use the content/bin in the path 
+PATH="~/content/bin/:$PATH"
+
+
 
 gen_random_id(){
 		echo $(hexdump -vn16 -e'4/4 "%08X" 1 "\n"' /dev/urandom)
