@@ -48,9 +48,6 @@ echo -e "#!/bin/dash\npython3 \n python github/atlas/atlas.py $@" > bin/atlas; c
 mkdir payloads 
 mkdir payloads/vuln-payloads
 cd payloads; git clone https://github.com/swisskyrepo/PayloadsAllTheThings;
-cd ..
-cd ..
-
 
 # get python pip packages  
 pip install wfuzz
@@ -62,6 +59,7 @@ pip install photon
 pip install arjun
 pip install s3recon
 
+cd ~
 echo "init finished" > .init_finished
 
 ## finally link everything in the /notebooks/bin/ directory to the /usr/local/bin
