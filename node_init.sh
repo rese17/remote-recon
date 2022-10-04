@@ -83,3 +83,4 @@ download_scripts(){;}
 
 
 echo "this is the new line that im adding"
+# this is a new comment in this freaking file
