@@ -155,6 +155,12 @@ run_command(){
 # 		#      : the function enters and then reset 
 
 # }
+purge_after_cmd(){
+		# does some cleanup after running
+		# the command 
+		echo "" > .running_cmd_pid
+		set_status "idle"
+}
 
 run_cmd (){
 		./.cmd_script
