@@ -8,6 +8,7 @@ PATH="~/content/bin/:$PATH"
 
 gen_random_id(){
 		echo $(hexdump -vn16 -e'4/4 "%08X" 1 "\n"' /dev/urandom)
+		python3 -c 'from string import ascii_letters, digits; from random import choice;print("".join(choice (ascii_letters + digits) for i in range(32)))'
 }
 
 get_status(){
