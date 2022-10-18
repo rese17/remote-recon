@@ -253,6 +253,17 @@ run_cmd (){
 		cleanup_after_cmd
 }
 
+cleanup(){
+		rm .cmd_stats
+		rm .cmd_script
+		rm .running_cmd_pid
+		rm .client_status
+		rm .status_map
+}
+
+# cleanup the previous data
+cleanup
+
 sid=$(gen_random_id)
 echo $sid
 sync_server $sid
