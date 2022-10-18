@@ -103,6 +103,31 @@ handle_signal(){
 }
 
 
+get_cmd_stats (){
+		# used to collect statistics for the
+		# recently run command
+		# it parses them in a json format to be
+		# sent back to the server 
+		stats=$(cat .cmd_stats)
+		if [ ! -z $stats ]
+		json_str="{"
+		IFS=$'\n'
+		then 
+				for i in $stats
+				do
+						name=${i%:*}
+						value=${i#*:}
+						json_str="$json_str, \"$name\":$value"
+				done
+		json_str="$json_str }"
+		fi
+
+		echo $json_str
+
+		# remove the stats from the file 
+		echo "" > .cmd_stats
+}
+
 parse_response (){
 		# check if there is a debugging in the response
 		debug=$(echo $resp | jq -r 'if .config?.debug? then "debug" else empty end' )
