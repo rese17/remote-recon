@@ -204,16 +204,18 @@ sync_server() {
 				chunk="$(echo $resp | jq -r 'if .task.chunk then .task.chunk else empty end')"
 				if [ ! -z "$cmd" ]
 				then
-						# echo "here"
-						set_script $cmd 
-						cat <<<$cmd
+						# echo "$tsk_id"
+						# echo "$chunk"
+						map_set_field "id" "$tsk_id"
+						map_set_field "chunk" "$chunk"
+						set_script $cmd
 						run_command 
 						echo "$!" > .running_cmd_pid
 
 				fi
+				get_cmd_stats
 				sleep 3
-		done 
-
+		done
 }
 
 run_command(){
