@@ -4,6 +4,51 @@
 # use the content/bin in the path 
 PATH="~/content/bin/:$PATH"
 
+# TODO: create a storage-like dcitionary but with files
+# TODO: use the status map to store everything 
+
+map_get_field(){
+		# DEBUG:
+		case $1 in
+				"id")
+						cat .status_map | sed -n '1p'
+						;;
+				"chunk")
+						cat .status_map | sed -n '2p'
+						;;
+				"status")
+						cat .status_map | sed -n '3p'
+						;;
+		esac 
+		
+}
+
+map_set_field (){
+		if [ ! -f .status_map ]
+		then
+				echo "creating .status_map file "
+				touch .status_map
+				echo "testid" > .status_map
+				echo "teststatus" >> .status_map
+				echo "testchunk" >> .status_map
+		fi
+		
+		case $1 in
+				"id")
+						sed -i "1 s/.*/$2/" .status_map
+						;;
+				"chunk")
+						sed -i "2 s/.*/$2/" .status_map
+						;;
+				"status")
+						sed -i "3 s/.*/$2/" .status_map
+						;;
+
+						# TODO: add more pairs
+		esac 
+		
+}
+
 
 
 gen_random_id(){
