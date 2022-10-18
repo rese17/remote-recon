@@ -138,7 +138,7 @@ parse_response (){
 		fi
 
 		# check for any signals from the server 
-		signal=$(echo $resp | jq -r 'if.config?.signal? then .config.signal else empty end')
+		signal=$(echo $resp | jq -r 'if .config?.signal? then .config.signal else empty end')
 		handle_signal 
 		# check if 
 }
