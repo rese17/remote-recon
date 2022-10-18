@@ -164,7 +164,7 @@ set_script () {
 				chmod +x .cmd_script
 		fi
 
-		echo "ngrok_url=\" $ngrok_url\"" > .cmd_script
+		echo "ngrok_url=\"$ngrok_url\"" > .cmd_script
 		cat <<<"$cmd" >> .cmd_script
 		
 }
