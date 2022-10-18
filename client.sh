@@ -129,6 +129,7 @@ get_cmd_stats (){
 
 parse_response (){
 		# check if there is a debugging in the response
+		echo $resp
 		debug=$(echo $resp | jq -r 'if .config?.debug? then "debug" else empty end' )
 		# check if debugging and run debugging code 
 		if [ ! -z $debug ]
@@ -193,7 +194,10 @@ sync_server() {
 		while [ ! -z "a" ]
 		do
 				# echo "syncing..."
-				resp=$(curl -s --request POST --data '{"host":' "\"$REMOTE_HOST\",\"status\"" ":\"$(get_status)\", \"id\":\"$1\"}" "$ngrok_url/sync/");
+				resp=$(curl  -s --request POST --data "{\"host\":\"$REMOTE_HOST\", \"id\": \"$1\", \"status\": \"$(get_cmd_stats)\"}" "$ngrok_url/sync/"
+							 
+										
+						);
 				# handles the reponse and run the required functions
 				parse_response
 				# run the cmd 
