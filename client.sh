@@ -52,7 +52,6 @@ map_set_field (){
 
 
 gen_random_id(){
-		echo $(hexdump -vn16 -e'4/4 "%08X" 1 "\n"' /dev/urandom)
 		python3 -c 'from string import ascii_letters, digits; from random import choice;print("".join(choice (ascii_letters + digits) for i in range(32)))'
 }
 
@@ -176,7 +175,7 @@ STATUS=$(get_status )
 get_ngrok_url (){
 		# how the freaking fuck should i dget that freaking url 
 		# curl "localhost"
-
+		echo 
 		url=$`curl -s --location --request POST "https://data.mongodb-api.com/app/data-qwghm/endpoint/data/v1/action/findOne"  \
 							 --header "Content-Type: application/json" \
 							 --header "Access-Control-Request-Headers: \*" \
@@ -195,7 +194,7 @@ sync_server() {
 		while [ ! -z "a" ]
 		do
 				# echo "syncing..."
-				resp=$(curl -s --request POST --data '{"host":"colab","status"'":\"$(get_status)\", \"id\":\"$1\"}" "$ngrok_url/sync/");
+				resp=$(curl -s --request POST --data '{"host":' "\"$REMOTE_HOST\",\"status\"" ":\"$(get_status)\", \"id\":\"$1\"}" "$ngrok_url/sync/");
 				# handles the reponse and run the required functions
 				parse_response
 				# run the cmd 
@@ -265,5 +264,9 @@ cleanup(){
 cleanup
 
 sid=$(gen_random_id)
+REMOTE_HOST=$1
 echo $sid
-sync_server $sid
+echo $REMOTE_HOST
+sync_server $sid  
+
+
