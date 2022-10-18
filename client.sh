@@ -200,6 +200,8 @@ sync_server() {
 				parse_response
 				# run the cmd 
 				cmd="$(echo $resp | jq 'if .task then .task else empty end' | jq -r '.cmd?')"
+				tsk_id="$(echo $resp | jq -r 'if .task.id then .task.id else empty end')"
+				chunk="$(echo $resp | jq -r 'if .task.chunk then .task.chunk else empty end')"
 				if [ ! -z "$cmd" ]
 				then
 						# echo "here"
