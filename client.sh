@@ -175,7 +175,6 @@ STATUS=$(get_status )
 get_ngrok_url (){
 		# how the freaking fuck should i dget that freaking url 
 		# curl "localhost"
-		echo 
 		url=$`curl -s --location --request POST "https://data.mongodb-api.com/app/data-qwghm/endpoint/data/v1/action/findOne"  \
 							 --header "Content-Type: application/json" \
 							 --header "Access-Control-Request-Headers: \*" \
