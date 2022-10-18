@@ -241,9 +241,16 @@ cleanup_after_cmd(){
 		set_status "idle"
 }
 
+init_before_cmd() {
+		# commands to run just before running the
+		# command 
+		echo "" > .cmd_stats
+}
+
 run_cmd (){
+		init_before_cmd 
 		./.cmd_script
-		purge_after_cmd
+		cleanup_after_cmd
 }
 
 sid=$(gen_random_id)
