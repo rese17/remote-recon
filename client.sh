@@ -221,7 +221,7 @@ sync_server() {
 run_command(){
 		# runs the command coming from the server
 		set_status "busy"
-		time run_cmd &
+		run_cmd &
 		kill -CONT $!
 }
 
