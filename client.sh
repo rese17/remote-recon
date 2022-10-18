@@ -193,7 +193,7 @@ sync_server() {
 		while [ ! -z "a" ]
 		do
 				# echo "syncing..."
-				resp=$(curl  -s --request POST --data "{\"host\":\"$REMOTE_HOST\", \"id\": \"$1\", \"status\": \"$(get_cmd_stats)\"}" "$ngrok_url/sync/"
+				resp=$(curl  -s --request POST --data "{\"host\":\"$REMOTE_HOST\", \"id\": \"$1\", \"status\": \"$(get_status)\"}" "$ngrok_url/sync/"
 							 
 										
 						);
