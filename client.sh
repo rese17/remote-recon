@@ -186,11 +186,10 @@ get_ngrok_url (){
 }
 
 
-
-ngrok_url=$(get_ngrok_url)
 sync_server() {
 		# syncs the node with the server 
 		ngrok_url=$(get_ngrok_url)
+		echo $ngrok_url
 		while [ ! -z "a" ]
 		do
 				# echo "syncing..."
