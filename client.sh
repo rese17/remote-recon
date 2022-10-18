@@ -234,9 +234,9 @@ run_command(){
 # 		#      : the function enters and then reset 
 
 # }
-purge_after_cmd(){
-		# does some cleanup after running
-		# the command 
+cleanup_after_cmd(){
+		# commands to run just after running the
+		# command 
 		echo "" > .running_cmd_pid
 		set_status "idle"
 }
