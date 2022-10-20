@@ -58,20 +58,25 @@ map_set_field (){
 }
 
 
-
 gen_random_id(){
 # generate 32 alphanumeric id using python random and string packages
 		python3 -c 'from string import ascii_letters, digits; from random import choice;print("".join(choice (ascii_letters + digits) for i in range(32)))'
 }
 
 get_status(){
-		if [ ! -f .client_status ]; then echo "idle" > .client_status; fi
-		cat .client_status
+		# returns the status from the 
+		# TODO: use the file map to store those things
+		echo $(map_get_field "status")
+		# if [ ! -f .client_status ]; then echo "idle" > .client_status; fi
+		# cat .client_status
 }
 
 set_status () {
-		if [ ! -f .client_status ]; then touch .client_status; fi
-		echo $1 > .client_status
+		# TODO: use the map to set the status
+		echo $(map_set_field "status" $1)
+
+		# if [ ! -f .client_status ]; then touch .client_status; fi
+		# echo $1 > .client_status
 }
 
 shutdown_program () {
