@@ -3,7 +3,19 @@
 # the programs to run are all stored in here
 # TEST:
 # save the current dir and go back again
-source ~/remote-recon/scripts/tools.sh
+REMOTE_HOST=$1
+echo "remote host: $REMOTE_HOST"
+
+# check if the remote host is local or not
+if [ $REMOTE_HOST == local ]
+then
+		export ROOT_DIR="/home/rese/programming-projects/bash/remote-node"
+else
+		export ROOT_DIR="~/remote-recon"
+fi 
+
+echo "setting th root dir to $ROOT_DIR"
+source $ROOT_DIR/scripts/tools.sh
 
 # use the content/bin in the path 
 PATH="~/content/bin/:$PATH"
