@@ -49,6 +49,10 @@ map_set_field (){
 						sed -i "3 s/.*/$2/" .status_map
 						;;
 
+				"pid")
+						sed -i "4 s/.*/$2/" .status_map
+						;;
+						
 						# TODO: add more pairs
 		esac 
 		
