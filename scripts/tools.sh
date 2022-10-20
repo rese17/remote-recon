@@ -4,8 +4,8 @@
 
 
 # * init the environment (download programs and so on)
-source ~/remote-recon/scripts/init_programs.sh
-echo "here in tools"
+source $ROOT_DIR/scripts/init_programs.sh
+
 run_subdominizier(){
 		# install 
 		
