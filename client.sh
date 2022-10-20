@@ -8,9 +8,6 @@ source /home/rese/programming-projects/bash/remote-node/scripts/tools.sh
 # use the content/bin in the path 
 PATH="~/content/bin/:$PATH"
 
-# TODO: create a storage-like dcitionary but with files
-# TODO: use the status map to store everything 
-
 map_get_field(){
 		# DEBUG:
 		case $1 in
@@ -23,6 +20,9 @@ map_get_field(){
 				"status")
 						cat .status_map | sed -n '3p'
 						;;
+				"pid" )
+						cat .status_map | sed -n '3p'
+						;; 
 		esac 
 		
 }
@@ -48,7 +48,6 @@ map_set_field (){
 				"status")
 						sed -i "3 s/.*/$2/" .status_map
 						;;
-
 				"pid")
 						sed -i "4 s/.*/$2/" .status_map
 						;;
