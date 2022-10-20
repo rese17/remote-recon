@@ -4,7 +4,7 @@
 
 
 # * init the environment (download programs and so on)
-source /home/rese/programming-projects/bash/remote-node/scripts/init_programs.sh
+source ~/remote-recon/scripts/init_programs.sh
 echo "here in tools"
 # subdominizer 
 subdomainizer() {

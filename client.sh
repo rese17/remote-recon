@@ -3,7 +3,7 @@
 # the programs to run are all stored in here
 # TEST:
 # save the current dir and go back again
-source /home/rese/programming-projects/bash/remote-node/scripts/tools.sh
+source ~/remote-recon/scripts/tools.sh
 
 # use the content/bin in the path 
 PATH="~/content/bin/:$PATH"
