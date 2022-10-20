@@ -33,8 +33,9 @@ map_set_field (){
 				echo "creating .status_map file "
 				touch .status_map
 				echo "testid" > .status_map
-				echo "teststatus" >> .status_map
 				echo "testchunk" >> .status_map
+				echo "idle" >> .status_map
+				echo "testpid" >> .status_map
 		fi
 		
 		case $1 in
