@@ -117,7 +117,6 @@ handle_signal(){
 		esac
 }
 
-
 # NOTE: not yet integrated 
 get_cmd_stats (){
 		# used to collect statistics for the
@@ -219,12 +218,14 @@ sync_server() {
 						);
 				# handles the reponse and run the required functions
 				parse_response
+
 				# run the cmd 
 				cmd="$(echo $resp | jq 'if .task then .task else empty end' | jq -r '.cmd?')"
 				tsk_id="$(echo $resp | jq -r 'if .task.id then .task.id else empty end')"
 				chunk="$(echo $resp | jq -r 'if .task.chunk then .task.chunk else empty end')"
 				if [ ! -z "$cmd" ]
 				then
+
 						# echo "$tsk_id"
 						# echo "$chunk"
 						map_set_field "id" "$tsk_id"
@@ -234,8 +235,11 @@ sync_server() {
 						echo "$!" > .running_cmd_pid
 
 				fi
+				# NOTE: not yet integrated 
 				get_cmd_stats
+				# TODO: read the sleep from the server response 
 				sleep 3
+
 		done
 }
 
@@ -255,6 +259,7 @@ run_command(){
 # 		#      : the function enters and then reset 
 
 # }
+
 cleanup_after_cmd(){
 		# commands to run just after running the
 		# command 
@@ -274,12 +279,18 @@ run_cmd (){
 		cleanup_after_cmd
 }
 
+
 cleanup(){
+		# runs at the head of the server to cleanup
+		# data from the previous runs 
 		rm .cmd_stats
 		rm .cmd_script
 		rm .running_cmd_pid
 		rm .client_status
 		rm .status_map
+
+		# init the map 
+		map_set_field
 }
 
 # cleanup the previous data
