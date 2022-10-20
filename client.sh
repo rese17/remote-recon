@@ -90,8 +90,8 @@ kill_task () {
 		kill -KILL $(map_get_field "pid" )
 		# kill -KILL $(cat .running_cmd_pid)
 		set_status "idle"
-		# TODO: change this to accomodate running multiple tasks
-		echo "" > .running_cmd_pid
+		# # TODO: change this to accomodate running multiple tasks
+		# echo "" > .running_cmd_pid
 }
 
 
@@ -118,6 +118,7 @@ handle_signal(){
 }
 
 
+# NOTE: not yet integrated 
 get_cmd_stats (){
 		# used to collect statistics for the
 		# recently run command
@@ -170,6 +171,7 @@ run_debug (){
 		then
 				echo -e "command:\n $(cat <<<$cmd)"
 		fi
+		# TODO: read the .status_map file 
 }
 
 
