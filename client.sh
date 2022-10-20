@@ -194,7 +194,7 @@ set_script () {
 		fi
 
 		echo "#!/bin/bash" > .cmd_script
-		echo "source ~/remote-recon/scripts/tools.sh" >> .cmd_script
+		echo "source $ROOT_DIR/scripts/tools.sh" >> .cmd_script
 		echo "ngrok_url=\"$ngrok_url\"" >> .cmd_script
 		cat <<<"$cmd" >> .cmd_script
 		
