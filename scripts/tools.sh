@@ -19,9 +19,10 @@ run_subdominizier(){
 # subdominizer 
 subdomainizer() {
 		
-		while getopts ":i:o:" opt; do
+		while getopts "I:i:o:" opt; do
 				case "${opt}" in 
 						i) file=$OPTARG;;
+						I) file=$OPTARG;;
 						o) output=$OPTARG;;
 						# TODO: adding threading and so on
 				esac
@@ -80,29 +81,32 @@ gethttp () {
 
 # gau
 gaufile () {
-		while getopts ":i:o:" opt; do
+		while getopts "I:i:o:" opt; do
 				case "${opt}" in 
 						i) file=$OPTARG;;
+						I) file=$OPTARG;;
 						o) output=$OPTARG;;
 						# TODO: adding threading and so on
 				esac
 		done
 		for i in $(cat $file)
 		do
-				gau -json -subs $i >> $output
+				gau --json --subs $i >> $output
 		done 
 }
 
 # gospider 
 spidersite () {
-		while getopts ":i:o:" opt; do
+		while getopts "I:i:o:" opt; do
 				case "${opt}" in 
 						i) file=$OPTARG;;
+						I) file=$OPTARG;;
 						o) output=$OPTARG;;
 						# TODO: adding threading and so on
 				esac
 		done		
 
 		gospider -S $file -q --js --include-subs --json >> ${output}
-
 }
+
+
