@@ -86,7 +86,9 @@ shutdown_program () {
 }
 
 kill_task () {
-		kill -KILL $(cat .running_cmd_pid)
+		# TODO: use map to get the pid 
+		kill -KILL $(map_get_field "pid" )
+		# kill -KILL $(cat .running_cmd_pid)
 		set_status "idle"
 		# TODO: change this to accomodate running multiple tasks
 		echo "" > .running_cmd_pid
