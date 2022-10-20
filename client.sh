@@ -61,6 +61,7 @@ map_set_field (){
 
 
 gen_random_id(){
+# generate 32 alphanumeric id using python random and string packages
 		python3 -c 'from string import ascii_letters, digits; from random import choice;print("".join(choice (ascii_letters + digits) for i in range(32)))'
 }
 
