@@ -182,7 +182,9 @@ set_script () {
 				chmod +x .cmd_script
 		fi
 
-		echo "ngrok_url=\"$ngrok_url\"" > .cmd_script
+		echo "#!/bin/bash" > .cmd_script
+		echo "source /home/rese/programming-projects/bash/remote-node/scripts/tools.sh" >> .cmd_script
+		echo "ngrok_url=\"$ngrok_url\"" >> .cmd_script
 		cat <<<"$cmd" >> .cmd_script
 		
 }
