@@ -23,18 +23,10 @@ PATH="~/content/bin/:$PATH"
 map_get_field(){
 		# DEBUG:
 		case $1 in
-				"id")
-						cat .status_map | sed -n '1p'
-						;;
-				"chunk")
-						cat .status_map | sed -n '2p'
-						;;
-				"status")
-						cat .status_map | sed -n '3p'
-						;;
-				"pid" )
-						cat .status_map | sed -n '3p'
-						;; 
+				"id") cat .status_map | sed -n '1p';;
+				"chunk") cat .status_map | sed -n '2p';;
+				"status") cat .status_map | sed -n '3p';;
+				"pid" ) cat .status_map | sed -n '3p';; 
 		esac 
 		
 }
@@ -42,7 +34,9 @@ map_get_field(){
 map_set_field (){
 		if [ ! -f .status_map ]
 		then
+				# TODO: should check if debug is enabled
 				echo "creating .status_map file "
+
 				touch .status_map
 				echo "testid" > .status_map
 				echo "testchunk" >> .status_map
@@ -51,20 +45,12 @@ map_set_field (){
 		fi
 		
 		case $1 in
-				"id")
-						sed -i "1 s/.*/$2/" .status_map
-						;;
-				"chunk")
-						sed -i "2 s/.*/$2/" .status_map
-						;;
-				"status")
-						sed -i "3 s/.*/$2/" .status_map
-						;;
-				"pid")
-						sed -i "4 s/.*/$2/" .status_map
-						;;
+				"id") sed -i "1 s/.*/$2/" .status_map;;
+				"chunk") sed -i "2 s/.*/$2/" .status_map;;
+				"status") sed -i "3 s/.*/$2/" .status_map;;
+				"pid") sed -i "4 s/.*/$2/" .status_map;;
 						
-						# TODO: add more pairs
+				# TODO: add more pairs
 		esac 
 		
 }
