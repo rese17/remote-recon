@@ -10,21 +10,6 @@ else
 		export ROOT_DIR="~/remote-recon"
 fi 
 
-atexit() {
-		echo "exiting..."
-		kill -KILL -$$
-		# echo "" > .client_pids
-}
-
-
-cleanup (){
-		echo "exiting..."
-		cat .client_pids
-}
-
-trap "atexit" INT 
-trap "cleanup" EXIT
-
 COUNT=$1
 echo $COUNT
 for i in $(seq $COUNT); do
