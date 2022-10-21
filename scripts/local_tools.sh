@@ -1,3 +1,4 @@
+#!/bin/bash
 # * get domain 
 # ** 
 
@@ -24,9 +25,15 @@ get_http_servers () {
 							-o {{files2}} \
 							---files1 $(ls -1 *domain.txt) \
 							---files2 $(ls -1 *domain.txt | sed -n 's/\-domain.txt$/-http.json/p') \
+							---active-nodes 10
+							# ---remote-only \
+
+		
 }
 
-rhttpx () {make_task gethttp $@}
+rhttpx () {
+		make_task gethttp $@
+}
 		
 # * spider http sites
 
@@ -37,14 +44,14 @@ rspider() {
 							-o {{files2}} \
 							---files1 *-http.txt \
 							---files2 $(echo *-http.txt | sed -n 's/-http\.txt/-gau-urls.json/p') \
-							# ---remote-only 
+							---remote-only 
 							
 		make_task spidersite \
 							-I {{files1}} \
 							-o {{files2}} \
 							---files1 *-http.txt \
 							---files2 $(ls -1 *-http.txt | sed -n 's/-http\.txt/-gospider-urls.json/p') \
-							# ---remote-only
+							---remote-only
 }
 
 # rgospider (){ make_task spidersite $@ }
@@ -52,12 +59,11 @@ rspider() {
 # * check secrets, domains in js files and so on
 
 get_secrets (){
-		echo $@
 		make_task subdomainizer \
 							-i {{list1}} \
 							-o {{files2}} \
 							---list1 *-http.txt \
-							---files2 $(echo *-http.txt | sed -n 's/-http\.json/-subdominizer.json/p') \
+							---files2 $(echo *-http.txt | sed -n 's/-http\.txt/-subdominizer.json/p') \
 							---remote-only \
 							---active-nodes 10
 		
@@ -68,12 +74,14 @@ get_secrets (){
 
 # * check technologies 
 get_technologies () {
+
+		make_task wapp \
 							-i {{list1}} \
-							-o {{files2}} \
+							-o {{files1}} \
 							---list1 *-http.txt \
-							---files2 $(echo *-http.txt | sed -n 's/-http\.json/-subdominizer.json/p') \
-							---local false
-		wapp   
+							---files1 $(echo *.txt | sed -n 's/-http\.txt/-wappalyzer.json/p') \
+							---active-nodes 10 \
+							---local-only
 }
 
 # * others
@@ -82,7 +90,4 @@ get_technologies () {
 # ** vulnerabilities 
 # *** sqlmap
 
- 
-
-rspider
-
+get_technologies

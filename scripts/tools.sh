@@ -32,15 +32,19 @@ subdomainizer() {
 
 # wapplyzer
 wapp () {
-	while getopts ":i:o:" opt; do
+	while getopts "I:i:o:" opt; do
 				case "${opt}" in 
 						i) file=$OPTARG;;
+						I) file=$OPTARG;;
 						o) output=$OPTARG;;
 						# TODO: adding threading and so on
 				esac
 		done	
 	# run wapplyzer 
-	for i in $file; do wappalyzer -r -p $i >> $output; done 
+	for i in $(cat $file); do
+			echo $i
+			wappalyzer $i -r -p  >> $output; done 
+	
 }
 
 # whatweb
