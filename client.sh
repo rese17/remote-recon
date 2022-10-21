@@ -4,7 +4,13 @@
 # TEST:
 # save the current dir and go back again
 REMOTE_HOST=$1
+status_file=".status_map_$2"
+
 echo "remote host: $REMOTE_HOST"
+
+trap cleanup EXIT
+trap cleanup INT
+trap atexit INT 
 
 # check if the remote host is local or not
 if [ $REMOTE_HOST == local ]
