@@ -10,10 +10,18 @@ else
 		export ROOT_DIR="~/remote-recon"
 fi 
 
+atexit() {
+		echo "exiting..."
+		kill -KILL -$$
+		# echo "" > .client_pids
+}
+
+trap "atexit" INT EXIT
+
 COUNT=$1
 echo $COUNT
 for i in $(seq $COUNT); do
-		$ROOT_DIR/client.sh $REMOTE_HOST $i  &
+		$($ROOT_DIR)/client.sh $REMOTE_HOST $i  &
 		kill -CONT $pid
 done 
 
