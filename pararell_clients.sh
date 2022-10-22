@@ -5,9 +5,9 @@ REMOTE_HOST=$2
 # set the count and run N pararell clients 
 if [ $REMOTE_HOST == local ]
 then
-		export ROOT_DIR="/home/rese/programming-projects/bash/remote-node"
+		export ROOT_DIR=/home/rese/programming-projects/bash/remote-node
 else
-		export ROOT_DIR="~/remote-recon"
+		export ROOT_DIR=~/remote-recon
 fi 
 
 atexit() {
