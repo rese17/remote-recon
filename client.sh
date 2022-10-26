@@ -198,14 +198,10 @@ sync_server() {
 
 				if [ ! -z "$cmd" ]
 				then
-
-						# echo "$tsk_id"
-						# echo "$chunk"
 						map_set_field "id" "$tsk_id"
 						map_set_field "chunk" "$chunk"
 						set_script $cmd
-						run_command 
-						echo "$!" > .running_cmd_pid
+						run_command
 
 				fi
 				# NOTE: not yet integrated 
@@ -220,8 +216,10 @@ run_command(){
 		# runs the command coming from the server
 		set_status "busy"
 		run_cmd &
+		map_set_field "pid" "$!"
 		kill -CONT $!
 }
+
 
 # check_status(){
 # 		# checks the status of the server by
@@ -248,7 +246,7 @@ init_before_cmd() {
 
 run_cmd (){
 		init_before_cmd 
-		./.cmd_script
+		./$script_file
 		cleanup_after_cmd
 }
 
@@ -256,11 +254,11 @@ run_cmd (){
 cleanup(){
 		# runs at the head of the server to cleanup
 		# data from the previous runs 
-		rm .cmd_stats
-		rm .cmd_script
-		rm .running_cmd_pid
-		rm .client_status
-		rm .status_map
+		rm .cmd_stats 2> /dev/null
+		rm $script_file 2> /dev/null
+		rm .running_cmd_pid 2> /dev/null
+		rm .client_status 2> /dev/null
+		rm $status_file 2> /dev/null
 
 		# init the map 
 		map_set_field
