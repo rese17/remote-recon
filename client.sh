@@ -3,6 +3,10 @@
 # the programs to run are all stored in here
 # TEST:
 # save the current dir and go back again
+
+# use the content/bin in the path 
+PATH="~/content/bin/:$PATH"
+
 REMOTE_HOST=$1
 status_file=.status_map_$2
 script_file=.cmd_script_$2
@@ -24,8 +28,6 @@ atexit() {
 echo "setting th root dir to $ROOT_DIR"
 source $ROOT_DIR/scripts/tools.sh
 
-# use the content/bin in the path 
-PATH="~/content/bin/:$PATH"
 
 map_get_field(){
 		# DEBUG:
@@ -216,7 +218,6 @@ run_command(){
 		# runs the command coming from the server
 		set_status "busy"
 		run_cmd &
-		map_set_field "pid" "$!"
 		kill -CONT $!
 }
 
