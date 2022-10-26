@@ -108,22 +108,10 @@ handle_signal(){
 		debug "having something like $1"
 		debug "receiving signal $signal"
 		case "$signal" in
-				"kill")
-						# handle kill
-						kill_task
-				;;
-				"wait")
-						# handle wait
-						set_status "wait"
-				;;
-				"shutdown")
-						# handle shutdown
-						shutdown_program
-				;;
-				"resume")
-						# handle resume
-						set_status "idle"
-				;;
+				"kill") kill_task;;
+				"wait") set_status "wait";;
+				"shutdown") shutdown_program;;
+				"resume") set_status "idle";;
 		esac
 }
 
