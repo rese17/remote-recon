@@ -40,23 +40,25 @@ map_get_field(){
 }
 
 map_set_field (){
-		if [ ! -f .status_map ]
+		if [ ! -f $status_file ]
 		then
 				# TODO: should check if debug is enabled
-				echo "creating .status_map file "
-
-				touch .status_map
-				echo "testid" > .status_map
-				echo "testchunk" >> .status_map
-				echo "idle" >> .status_map
-				echo "testpid" >> .status_map
+				echo "creating $status_file file "
+				
+				touch $status_file
+				echo "testid" > $status_file
+				echo "testchunk" >> $status_file
+				echo "idle" >> $status_file
+				echo "testpid" >> $status_file
+				echo "debug" >> $status_file
 		fi
 		
 		case $1 in
-				"id") sed -i "1 s/.*/$2/" .status_map;;
-				"chunk") sed -i "2 s/.*/$2/" .status_map;;
-				"status") sed -i "3 s/.*/$2/" .status_map;;
-				"pid") sed -i "4 s/.*/$2/" .status_map;;
+				"id") sed -i "1 s/.*/$2/" $(echo $status_file);;
+				"chunk") sed -i "2 s/.*/$2/" $(echo $status_file);;
+				"status") sed -i "3 s/.*/$2/" $(echo $status_file);;
+				"pid") sed -i "4 s/.*/$2/" $(echo $status_file);;
+				"debug") sed -i "5 s/.*/$2/" $(echo $status_file);;
 						
 				# TODO: add more pairs
 		esac 
