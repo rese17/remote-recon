@@ -161,10 +161,12 @@ set_script () {
 				chmod +x $script_file
 		fi
 
-		echo "#!/bin/bash" > .cmd_script
-		echo "source $ROOT_DIR/scripts/tools.sh" >> .cmd_script
-		echo "ngrok_url=\"$ngrok_url\"" >> .cmd_script
-		cat <<<"$cmd" >> .cmd_script
+		echo "#!/bin/bash" > $script_file
+		# setting the process id to kill from the parent script 
+		echo "sed -i \"4 s/.*/\$$/\" $status_file ;" >> $script_file
+		echo "source $ROOT_DIR/scripts/tools.sh" >> $script_file
+		echo "ngrok_url=\"$NGROK_URL\"" >> $script_file
+		cat <<<"$cmd" >> $script_file
 		
 }
 
