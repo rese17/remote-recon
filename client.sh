@@ -101,6 +101,7 @@ kill_task () {
 		echo "killing " $(map_get_field "pid")
 		pkill -P $(map_get_field "pid")
 		kill -KILL $(map_get_field "pid")
+		kill -KILL -$(map_get_field "pid")
 		set_status "idle"
 }
 
