@@ -143,15 +143,10 @@ get_cmd_stats (){
 
 parse_response (){
 		# check if there is a debugging in the response
-		echo $resp
-		debug=$(echo $resp | jq -r 'if .config?.debug? then "debug" else empty end' )
-		# check if debugging and run debugging code 
-		if [ ! -z $debug ]
-		then
-				run_debug
-		fi
-
-		# check for any signals from the server 
+		# echo $resp
+		debug=$(echo $resp | jq -r 'if .config?.debug? then "debug" else empty end')
+		if [ ! -z $debug ]; then map_set_field "debug" "true"; fi
+		# check for any signals from the server
 		signal=$(echo $resp | jq -r 'if .config?.signal? then .config.signal else empty end')
 		handle_signal 
 		# check if 
