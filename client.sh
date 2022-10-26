@@ -276,10 +276,6 @@ cleanup
 
 sid=$(gen_random_id)
 REMOTE_HOST=$1
-echo $sid
-echo $REMOTE_HOST
-sync_server $sid  
-
 
 echo "node id: $sid"
 echo "remote host: $REMOTE_HOST"
