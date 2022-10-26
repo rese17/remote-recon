@@ -51,6 +51,6 @@ for i in $(seq $COUNT); do
 		pid=$!
 		kill -CONT $pid 2> /dev/null
 done 
-
+echo "ngrok_url $(get_ngrok_url) from the pararell nodes script"
 while [ ! -z "a" ]; do sleep 1 ; done  
 
