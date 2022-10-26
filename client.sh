@@ -90,7 +90,8 @@ set_status () {
 shutdown_program () {
 		# gracefully kills the script 
 		# TODO: add the graceful part
-		kill -KILL $$
+		kill -KILL -$CLIENT_PID 2> /dev/null
+		kill -KILL $CLIENT_PID
 }
 
 kill_task () {
@@ -98,13 +99,13 @@ kill_task () {
 		kill -KILL $(map_get_field "pid" )
 		# kill -KILL $(cat .running_cmd_pid)
 		set_status "idle"
-		# # TODO: change this to accomodate running multiple tasks
-		# echo "" > .running_cmd_pid
 }
 
 
 handle_signal(){
 		# if signal is stop kill the running process
+		debug "having something like $1"
+		debug "receiving signal $signal"
 		case "$signal" in
 				"kill")
 						# handle kill
@@ -145,7 +146,7 @@ get_cmd_stats (){
 		json_str="$json_str }"
 		fi
 
-		echo $json_str
+		# echo $json_str
 
 		# remove the stats from the file 
 		echo "" > .cmd_stats
@@ -168,19 +169,6 @@ parse_response (){
 }
 
 # TODO: add more debugging code functions
-run_debug (){
-		echo $resp
-		echo "server response: $resp"
-		status="node status: $(get_status) "
-		echo $status
-		
-		if [ ! -z "$cmd" ]
-		then
-				echo -e "command:\n $(cat <<<$cmd)"
-		fi
-		# TODO: read the .status_map file 
-}
-
 
 set_script () {
 		if [ ! -f .cmd_script ]
@@ -231,6 +219,13 @@ sync_server() {
 				cmd="$(echo $resp | jq 'if .task then .task else empty end' | jq -r '.cmd?')"
 				tsk_id="$(echo $resp | jq -r 'if .task.id then .task.id else empty end')"
 				chunk="$(echo $resp | jq -r 'if .task.chunk then .task.chunk else empty end')"
+
+				# debugging 
+
+				# debug "server response: $resp"
+				debug "node status: $(get_status) "
+				debug "command:\n $(cat <<<$cmd)"
+
 				if [ ! -z "$cmd" ]
 				then
 
@@ -311,3 +306,10 @@ echo $REMOTE_HOST
 sync_server $sid  
 
 
+echo "node id: $sid"
+echo "remote host: $REMOTE_HOST"
+echo "remote host id: $HOST_ID"
+echo "status_map: $status_file"
+echo "script_file: $script_file"
+echo "ngrok_url: $NGROK_URL"
+sync_server $sid  
