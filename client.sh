@@ -99,8 +99,12 @@ kill_node () {
 shutdown_program () {
 		# gracefully kills the script 
 		# TODO: add the graceful part
-		kill -KILL -$PPID > /dev/null
+		debug "shutting down the program"
+		kill -KILL -$PPID 2> /dev/null
 		kill -KILL $CLIENT_PID
+		
+		kill_node
+		kill_task
 }
 
 kill_task () {
