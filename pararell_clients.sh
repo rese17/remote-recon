@@ -45,9 +45,11 @@ trap "atexit" INT EXIT
 
 COUNT=$1
 echo $COUNT
+ENV_ID="$(gen_random_id)"
 for i in $(seq $COUNT); do
-		$(echo $ROOT_DIR)/client.sh $REMOTE_HOST $i &
-		kill -CONT $pid
+		$(echo $ROOT_DIR)/client.sh $REMOTE_HOST $i $ENV_ID &
+		pid=$!
+		kill -CONT $pid 2> /dev/null
 done 
 
 while [ ! -z "a" ]; do sleep 1 ; done  
