@@ -89,10 +89,17 @@ set_status () {
 		# echo $1 > .client_status
 }
 
-shutdown_program () {
+kill_node () {
 		# gracefully kills the script 
 		# TODO: add the graceful part
 		kill -KILL -$CLIENT_PID 2> /dev/null
+		kill -KILL $CLIENT_PID
+}
+
+shutdown_program () {
+		# gracefully kills the script 
+		# TODO: add the graceful part
+		kill -KILL -$PPID > /dev/null
 		kill -KILL $CLIENT_PID
 }
 
@@ -114,6 +121,7 @@ handle_signal(){
 				"kill") kill_task;;
 				"wait") set_status "wait";;
 				"shutdown") shutdown_program;;
+				"kill_node") kill_node;;
 				"resume") set_status "idle";;
 		esac
 }
@@ -286,3 +294,4 @@ echo "status_map: $status_file"
 echo "script_file: $script_file"
 echo "ngrok_url: $NGROK_URL"
 sync_server $sid  
+
