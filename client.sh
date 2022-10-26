@@ -174,29 +174,13 @@ set_script () {
 # shared varaibles 
 STATUS=$(get_status )
 
-get_ngrok_url (){
-		# how the freaking fuck should i dget that freaking url 
-		# curl "localhost"
-		url=$`curl -s --location --request POST "https://data.mongodb-api.com/app/data-qwghm/endpoint/data/v1/action/findOne"  \
-							 --header "Content-Type: application/json" \
-							 --header "Access-Control-Request-Headers: \*" \
-							 --header "api-key: llHw9CnMFOKEBLS4r5oJxrp41bexNZrpKmHD0prMZshCGykhgMyDdzDjK3MrjJ0p" \
-							 --data-raw \
-							 "{\"collection\":\"config\", \"database\":\"recon-config\", \"dataSource\":\"recon-config\", \"filter\":{\"key\":\"1\"}}"`
-		echo ${url:1} | jq -r '.document.url'
-}
-
-
 sync_server() {
-		# syncs the node with the server 
-		ngrok_url=$(get_ngrok_url)
-		echo $ngrok_url
+		# syncs the node with the server
+		
 		while [ ! -z "a" ]
 		do
 				# echo "syncing..."
-				resp=$(curl  -s --request POST --data "{\"host\":\"$REMOTE_HOST\", \"id\": \"$1\", \"status\": \"$(get_status)\"}" "$ngrok_url/sync/"
-							 
-										
+				resp=$(curl  -s --request POST --data "{\"host\":\"$REMOTE_HOST\", \"id\": \"$1\", \"host-id\": \"$HOST_ID\",\"status\": \"$(get_status)\"}" "$NGROK_URL/sync/"
 						);
 				# handles the reponse and run the required functions
 				parse_response
