@@ -92,6 +92,7 @@ set_status () {
 kill_node () {
 		# gracefully kills the script 
 		# TODO: add the graceful part
+		debug "killing node $2"
 		kill -KILL -$CLIENT_PID 2> /dev/null
 		kill -KILL $CLIENT_PID
 }
