@@ -81,7 +81,7 @@ get_status(){
 
 set_status () {
 		# TODO: use the map to set the status
-		echo $(map_set_field "status" $1)
+		map_set_field "status" $1
 
 		# if [ ! -f .client_status ]; then touch .client_status; fi
 		# echo $1 > .client_status
