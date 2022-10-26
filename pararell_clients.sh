@@ -1,5 +1,5 @@
 #!/bin/bash
-
+PATH="~/content/bin/:$PATH"
 REMOTE_HOST=$2
 
 # set the count and run N pararell clients 
