@@ -4,9 +4,10 @@
 # TEST:
 # save the current dir and go back again
 REMOTE_HOST=$1
-status_file=".status_map_$2"
-
-echo "remote host: $REMOTE_HOST"
+status_file=.status_map_$2
+script_file=.cmd_script_$2
+HOST_ID=$3
+CLIENT_PID=$$
 
 trap cleanup EXIT
 trap cleanup INT
