@@ -264,6 +264,13 @@ cleanup(){
 		map_set_field
 }
 
+debug () {
+		if [ $(map_get_field "debug") == true ];
+		then
+				echo -e "DEBUG: " $1
+		fi
+}
+
 # cleanup the previous data
 cleanup
 
