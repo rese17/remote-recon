@@ -30,10 +30,11 @@ PATH="~/content/bin/:$PATH"
 map_get_field(){
 		# DEBUG:
 		case $1 in
-				"id") cat .status_map | sed -n '1p';;
-				"chunk") cat .status_map | sed -n '2p';;
-				"status") cat .status_map | sed -n '3p';;
-				"pid" ) cat .status_map | sed -n '3p';; 
+				"id") cat $status_file | sed -n '1p';;
+				"chunk") cat $status_file | sed -n '2p';;
+				"status") cat $status_file | sed -n '3p';;
+				"pid" ) cat $status_file | sed -n '4p';; 
+				"debug" ) cat $status_file | sed -n '5p';; 
 		esac 
 		
 }
