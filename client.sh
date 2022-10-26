@@ -95,9 +95,10 @@ shutdown_program () {
 }
 
 kill_task () {
-		# TODO: use map to get the pid 
-		kill -KILL $(map_get_field "pid" )
-		# kill -KILL $(cat .running_cmd_pid)
+		debug "killing process $(map_get_field "pid" )"
+		echo "killing " $(map_get_field "pid")
+		pkill -P $(map_get_field "pid")
+		kill -KILL $(map_get_field "pid")
 		set_status "idle"
 }
 
