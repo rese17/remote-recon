@@ -20,12 +20,6 @@ atexit() {
 }
 
 # check if the remote host is local or not
-if [ $REMOTE_HOST == local ]
-then
-		export ROOT_DIR=/home/rese/programming-projects/bash/remote-node
-else
-		export ROOT_DIR=~/remote-recon
-fi 
 
 echo "setting th root dir to $ROOT_DIR"
 source $ROOT_DIR/scripts/tools.sh
