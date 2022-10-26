@@ -148,17 +148,17 @@ parse_response (){
 		if [ ! -z $debug ]; then map_set_field "debug" "true"; fi
 		# check for any signals from the server
 		signal=$(echo $resp | jq -r 'if .config?.signal? then .config.signal else empty end')
-		handle_signal 
+		handle_signal $signal
 		# check if 
 }
 
 # TODO: add more debugging code functions
 
 set_script () {
-		if [ ! -f .cmd_script ]
+		if [ ! -f $script_file ]
 		then
-				touch .cmd_script
-				chmod +x .cmd_script
+				touch $script_file
+				chmod +x $script_file
 		fi
 
 		echo "#!/bin/bash" > .cmd_script
