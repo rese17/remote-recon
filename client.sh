@@ -11,7 +11,13 @@ CLIENT_PID=$$
 
 trap cleanup EXIT
 trap cleanup INT
-trap atexit INT 
+trap atexit INT
+
+atexit() {
+		echo "exiting..."
+		kill -KILL -$$
+		# echo "" > .client_pids
+}
 
 # check if the remote host is local or not
 if [ $REMOTE_HOST == local ]
